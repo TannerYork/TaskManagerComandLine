@@ -43,3 +43,10 @@ import Foundation
 //Make sure your code is formatted and commented well!
 //
 
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "MM/dd/yyyy"
+let calendar = Calendar.current
+let currentDate = Date()
+let componetsOfcurrentDate = calendar.dateComponents([.year, .day, .month], from: currentDate)
+
+menu.go()

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-let utitlities = Utilities() 
 class Utilities {
     
     //Method for getting string input and makeing sure its usable
-    func getStringInput() -> String {
+    static func getStringInput() -> String {
         var userInput = readLine()
         while userInput == nil || userInput == "" {
             print("Invaled Input")
@@ -21,7 +20,7 @@ class Utilities {
     }
     
     //Method for getting integer intput and making sure its usable
-    func getIntInput() -> Int {
+    static func getIntInput() -> Int {
         var userInput = Int(readLine()!)
         while userInput == nil {
             print("Invaled Input")
@@ -30,8 +29,8 @@ class Utilities {
         return userInput!
     }
     
-    //Method for validating userInput
-    func validateUserInputForTaskInTaskList(_ input: String) -> Bool {
+    //Method for validating userInput and making sure it corrispond with an index in the tasklist array
+   static func validateUserInputForTaskInTaskList(_ input: String) -> Bool {
         let validUserInput = Array(0..<taskList.taskList.count)
         guard let input = Int(input) else {
             return false
