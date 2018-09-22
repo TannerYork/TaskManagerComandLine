@@ -40,16 +40,23 @@ class TaskList {
         print("\n ")
         print("Enter the task order number, starting from the top adn going down.")
         let userInput = Utilities.getIntInput()
-        print("Are you sure you want to remove \(taskList[userInput].title)?")
-        let comfirmRemove = Utilities.getStringInput()
-        switch comfirmRemove {
-        case "Y":
-            taskList.remove(at: userInput)
-        case "N":
-            break
-        default:
-            break
+        for index in Array(0..<taskList.count) {
+            if userInput == index {
+                print("Are you sure you want to remove \(taskList[userInput].title)?")
+                let comfirmRemove = Utilities.getStringInput()
+                switch comfirmRemove {
+                case "Y":
+                    taskList.remove(at: userInput)
+                case "N":
+                    break
+                default:
+                    break
+                }
+            } else {
+                print("Invaled Input, not a task index.")
+            }
         }
+        
     }
     
     //Method to add task
@@ -71,23 +78,23 @@ class TaskList {
             printCurrentTask()
             let userInput = Utilities.getStringInput()
             switch userInput {
-            case "title":
+            case "title".uppercased():
                 print("Enter new title")
                 let newTitle = Utilities.getStringInput()
                 newTask.changeTitle(to: newTitle)
-            case "details":
+            case "details".uppercased():
                 print("Enter detials of task")
                 let newDetails = Utilities.getStringInput()
                 newTask.changeDetails(to: newDetails)
-            case "date":
+            case "date".uppercased():
                 print("Enter a date for task to be completed by, MM/dd/yyy")
                 let newDate = Utilities.getStringInput()
                 newTask.completionDate(newDate)
-            case "priority":
+            case "priority".uppercased():
                 print("Enter priority, 1-10")
                 let priorityLevel = Utilities.getIntInput()
                 newTask.setPriority(to: priorityLevel)
-            case "taskComplete":
+            case "taskComplete".uppercased():
                 print("Are you sure you are done? Y/N")
                 var userInput = Utilities.getStringInput()
                 switch userInput {
@@ -112,8 +119,6 @@ class TaskList {
         
     }
     
-    //Method for listing details of task
-    func taskDetails(of task: Task) {
-        print("Nothing here yet")
-    }
+    
+    
 }

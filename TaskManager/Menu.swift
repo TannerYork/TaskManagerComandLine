@@ -9,10 +9,9 @@
 import Foundation
 let menu = Menu()
 class Menu {
-    
+    var applicationRunning = true
     //Method for runing program
     func go() {
-        var applicationRunning = true
         while applicationRunning {
             printMenu()
             let userInput = Utilities.getStringInput()
@@ -43,9 +42,9 @@ class Menu {
 Options:
 - Add Task
 - Remove Task
-- List Completed Task
-- List Uncompleted Task
-- Details (Class Title)
+- Completed Task
+- Uncompleted Task
+- Details "Class Title"
 - Quit
 @@ To mark a task complete or incomplete just enter the title of the task @@
 
@@ -56,15 +55,15 @@ Options:
     //Method for handling user input for the menu
     func handleUserInput(_ input: String) {
         switch input {
-        case "add task": //Run program for creating a new task
+        case "add task".uppercased(): //Run program for creating a new task
             taskList.addTask()
-        case "remove task": //Run program for removing a task
+        case "remove task".uppercased(): //Run program for removing a task
             taskList.removeTask()
-        case "completed task": //Run program for listing only completed task
+        case "completed task".uppercased(): //Run program for listing only completed task
             taskList.printCompletedTask()
-        case "uncompeted task": //Run program for listing only uncompleted task
+        case "uncompeted task".uppercased(): //Run program for listing only uncompleted task
             taskList.printUncompletedTask()
-        case "quit": //Run program for leavign the aplication
+        case "quit".uppercased(): //Run program for leavign the aplication
             print("Nothing here yet")
         default:
             print("Invaled Input")
@@ -74,6 +73,20 @@ Options:
     
     //Method for exiting the aplication
     func quit() {
-        
+        applicationRunning = false
+    }
+    
+    //Method for entering a user password
+    func logingIn() {
+        var password = "password".uppercased()
+        print("Welcome to the task manager, please enter your password.")
+        var userInput = readLine()
+        while userInput != password {
+            print("Invaled password, please try agian.")
+            userInput = readLine()
+        }
+        if userInput == password {
+            menu.go()
+        }
     }
 }
