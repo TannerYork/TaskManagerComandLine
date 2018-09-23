@@ -18,7 +18,7 @@ class Menu {
             for index in 0..<taskList.taskList.count {
                 if userInput == taskList.taskList[index].title {
                     taskList.taskList[index].changeCompletionStatus()
-                }
+                } 
             }
             handleUserInput(userInput)
         }
@@ -44,7 +44,7 @@ Options:
 - Remove Task
 - Completed Task
 - Uncompleted Task
-- Details "Class Title"
+- Details "Title Of Class"
 - Quit
 @@ To mark a task complete or incomplete just enter the title of the task @@
 
@@ -53,17 +53,21 @@ Options:
     }
     
     //Method for handling user input for the menu
+    
     func handleUserInput(_ input: String) {
         switch input {
-        case "add task".uppercased(): //Run program for creating a new task
+        case "add task": //Run program for creating a new task
             taskList.addTask()
-        case "remove task".uppercased(): //Run program for removing a task
+        case "remove task": //Run program for removing a task
             taskList.removeTask()
-        case "completed task".uppercased(): //Run program for listing only completed task
+        case "completed task": //Run program for listing only completed task
             taskList.printCompletedTask()
-        case "uncompeted task".uppercased(): //Run program for listing only uncompleted task
+        case "uncompeted task": //Run program for listing only uncompleted task
             taskList.printUncompletedTask()
-        case "quit".uppercased(): //Run program for leavign the aplication
+        case "details \(taskList.details(for: input))": //This still needs to be fixed
+            print("")
+            for characters in case
+        case "quit": //Run program for leavign the aplication
             print("Nothing here yet")
         default:
             print("Invaled Input")
@@ -78,7 +82,7 @@ Options:
     
     //Method for entering a user password
     func logingIn() {
-        var password = "password".uppercased()
+        let password = "password"
         print("Welcome to the task manager, please enter your password.")
         var userInput = readLine()
         while userInput != password {

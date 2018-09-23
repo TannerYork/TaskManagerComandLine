@@ -7,6 +7,7 @@
 //
 
 import Foundation
+var placeHolderTask = Task(title: "None", detailsOfTask: "", completionStaus: false, completByDate: nil)
 class Task {
     var title: String
     var detailsOfTask: String
@@ -23,15 +24,15 @@ class Task {
             priority = 0
         }
         for int in (0...priority + 1) { //Adds a ! mark for the pirority number(This needs to be redone)
-            self.title = title + "!"
+            self.title.append("!")
         }
         if completByDate != nil {
             let compomentsOfDate = calendar.dateComponents([.year, .day, .month], from: completByDate!)
             if compomentsOfDate.day == 01 && compomentsOfDate.month == 12 {
-               self.title = "\(self.title) 🎄"
+                self.title.append("🎄")
             }
         }
-
+        
         
         
     }
@@ -72,7 +73,7 @@ class Task {
         let newDate: String
         dateFormatter.dateFormat = "MM/dd/yyyy"
         if completeByDate != nil {
-             newDate = (dateFormatter.string(from: completeByDate!))
+            newDate = (dateFormatter.string(from: completeByDate!))
         } else {
             newDate = ""
         }
@@ -82,13 +83,14 @@ class Task {
     //Method for printing task details
     func printDetiasl() {
         print("""
-             \(self.title)
+            \(self.title)
             Title: \(self.title)
             Details: \(self.detailsOfTask)
             Completion Date: \(self.CompletionDateFormated())
             Priority: \(self.priority)
             """)
     }
+    
     
     
 }

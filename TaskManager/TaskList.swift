@@ -78,23 +78,23 @@ class TaskList {
             printCurrentTask()
             let userInput = Utilities.getStringInput()
             switch userInput {
-            case "title".uppercased():
+            case "title":
                 print("Enter new title")
                 let newTitle = Utilities.getStringInput()
                 newTask.changeTitle(to: newTitle)
-            case "details".uppercased():
+            case "details":
                 print("Enter detials of task")
                 let newDetails = Utilities.getStringInput()
                 newTask.changeDetails(to: newDetails)
-            case "date".uppercased():
+            case "date":
                 print("Enter a date for task to be completed by, MM/dd/yyy")
                 let newDate = Utilities.getStringInput()
                 newTask.completionDate(newDate)
-            case "priority".uppercased():
+            case "priority":
                 print("Enter priority, 1-10")
                 let priorityLevel = Utilities.getIntInput()
                 newTask.setPriority(to: priorityLevel)
-            case "taskComplete".uppercased():
+            case "taskComplete":
                 print("Are you sure you are done? Y/N")
                 var userInput = Utilities.getStringInput()
                 switch userInput {
@@ -115,10 +115,18 @@ class TaskList {
                 continue newTask
             }
         }
-        
-        
     }
     
-    
-    
+    //Method for the details option
+    func details(for input: String) -> Task {
+        var taskToBeReturned = placeHolderTask
+        for task in (0..<taskList.count) {
+            if input == taskList[task].title {
+                taskToBeReturned = taskList[task]
+                break
+            }
+        }
+        return taskToBeReturned
+    }
 }
+
