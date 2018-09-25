@@ -43,6 +43,14 @@ import Foundation
 //Make sure your code is formatted and commented well!
 //
 
+
+//Format for NSUserDefaults
+
+
+
+
+
+//Format for dates
 let dateFormatter = DateFormatter()
 dateFormatter.dateFormat = "MM/dd/yyyy"
 let calendar = Calendar.current

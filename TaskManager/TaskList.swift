@@ -10,7 +10,7 @@ import Foundation
 let taskList = TaskList()
 class TaskList {
     var taskList: [Task] = []
-    
+
     //Method for aranging task based on priority
     func sortByPriority() -> [Task] {
         let sortedTaskList = taskList.sorted(by: { $0.priority > $1.priority })
@@ -71,6 +71,8 @@ class TaskList {
                 Details: \(newTask.detailsOfTask)
                 Completion Date: \(newTask.CompletionDateFormated())
                 Priority: \(newTask.priority)
+                @@ Enter taskComplete to finish the
+                   new task @@
                 """)
         }
         var finishTask = false
@@ -80,14 +82,19 @@ class TaskList {
             switch userInput {
             case "title":
                 print("Enter new title")
-                let newTitle = Utilities.getStringInput()
+                var newTitle = Utilities.getStringInput()
+                for task in taskList { //Makes sure there are no duplicats so the print task details work for all the task, even if they have the same title.
+                    if newTitle == task.title {
+                        newTitle.append("*")
+                    }
+                }
                 newTask.changeTitle(to: newTitle)
             case "details":
                 print("Enter detials of task")
                 let newDetails = Utilities.getStringInput()
                 newTask.changeDetails(to: newDetails)
-            case "date":
-                print("Enter a date for task to be completed by, MM/dd/yyy")
+            case "completion date":
+                print("Enter a date for task to be completed by, MM/dd/yyyy")
                 let newDate = Utilities.getStringInput()
                 newTask.completionDate(newDate)
             case "priority":
@@ -118,15 +125,91 @@ class TaskList {
     }
     
     //Method for the details option
-    func details(for input: String) -> Task {
-        var taskToBeReturned = placeHolderTask
-        for task in (0..<taskList.count) {
-            if input == taskList[task].title {
-                taskToBeReturned = taskList[task]
+    func details() {
+        print("What task do you want the details for?")
+        let detailsOf = readLine()
+        for task in taskList {
+            if detailsOf ==  task.title {
+                print("\n ")
+                print("""
+                    \(task.title)
+                    Title: \(task.title)
+                    Details: \(task.detailsOfTask)
+                    Completion Date: \(task.CompletionDateFormated())
+                    Priority: \(task.priority)
+                    """)
                 break
             }
         }
-        return taskToBeReturned
+    }
+    
+    
+    //Method for editing task
+    func editTask() {
+        print("What task do you want to edit?")
+        var taskToBeEditied = readLine()
+        for task in taskList {
+            if taskToBeEditied == task.title {
+                func printCurrentTask() {
+                    print("\n ")
+                    print("""
+                        Current Task
+                        Title: \(task.title)
+                        Details: \(task.detailsOfTask)
+                        Completion Date: \(task.CompletionDateFormated())
+                        Priority: \(task.priority)
+                        @@ Enter taskComplete to finish
+                            the edit @@
+                        """)
+                }
+                var finishTask = false
+                editTask: while !finishTask {
+                    printCurrentTask()
+                    let userInput = Utilities.getStringInput()
+                    switch userInput {
+                    case "title":
+                        print("Enter new title")
+                        var newTitle = Utilities.getStringInput()
+                        for task in taskList { //Makes sure there are no duplicats so the print task details work for all the task, even if they have the same title.
+                            if newTitle == task.title {
+                                newTitle.append("*")
+                            }
+                        }
+                        task.changeTitle(to: newTitle)
+                    case "details":
+                        print("Enter detials of task")
+                        let newDetails = Utilities.getStringInput()
+                        task.changeDetails(to: newDetails)
+                    case "completion date":
+                        print("Enter a date for task to be completed by, MM/dd/yyy")
+                        let newDate = Utilities.getStringInput()
+                        task.completionDate(newDate)
+                    case "priority":
+                        print("Enter priority, 1-10")
+                        let priorityLevel = Utilities.getIntInput()
+                        task.setPriority(to: priorityLevel)
+                    case "taskComplete":
+                        print("Are you sure you are done? Y/N")
+                        var userInput = Utilities.getStringInput()
+                        switch userInput {
+                        case "Y":
+                            finishTask = true
+                        case "N":
+                            continue editTask
+                        default:
+                            print("/n ")
+                            print("Invaled Input")
+                            userInput = Utilities.getStringInput()
+                        }
+                    default:
+                        print("\n ")
+                        print("Invaled Input")
+                        print("\n ")
+                        continue editTask
+                    }
+                }
+            }
+        }
     }
 }
 

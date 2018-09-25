@@ -23,12 +23,12 @@ class Task {
         if priority < 0 { //Makes sure the priority can never go below 0 and break code
             priority = 0
         }
-        for int in (0...priority + 1) { //Adds a ! mark for the pirority number(This needs to be redone)
+        for _ in (0..<priority) { //Adds a ! mark for the pirority number(This needs to be redone)
             self.title.append("!")
         }
         if completByDate != nil {
             let compomentsOfDate = calendar.dateComponents([.year, .day, .month], from: completByDate!)
-            if compomentsOfDate.day == 01 && compomentsOfDate.month == 12 {
+            if compomentsOfDate.day == 24 && compomentsOfDate.month == 12 {
                 self.title.append("🎄")
             }
         }
@@ -58,6 +58,12 @@ class Task {
     }
     
     //Method for setting priorities
+    enum importance: Int {
+        case highPriority = 4
+        case meduimPriority = 3
+        case lowPriority = 2
+        case noPriority = 0
+    }
     func setPriority(to int: Int) {
         priority = int
     }

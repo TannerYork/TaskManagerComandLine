@@ -42,12 +42,15 @@ class Menu {
 Options:
 - Add Task
 - Remove Task
+- Edit Task
 - Completed Task
 - Uncompleted Task
-- Details "Title Of Class"
+- Details
 - Quit
-@@ To mark a task complete or incomplete just enter the title of the task @@
-
+@@ To mark a task complete or incomplete just
+   enter the title of the task. @@
+@@ To access a option just enter the option name,
+   this is active throughout the aplication. @@
 
 """)
     }
@@ -60,15 +63,20 @@ Options:
             taskList.addTask()
         case "remove task": //Run program for removing a task
             taskList.removeTask()
+        case "edit task": //Edits a task the user enters
+            taskList.editTask()
+            sleep(10)
         case "completed task": //Run program for listing only completed task
             taskList.printCompletedTask()
+            sleep(10)
         case "uncompeted task": //Run program for listing only uncompleted task
             taskList.printUncompletedTask()
-        case "details \(taskList.details(for: input))": //This still needs to be fixed
-            print("")
-            for characters in case
+            sleep(10)
+        case "details": //Ask user which task details they want and prints the entered task details.
+            taskList.details()
+            sleep(10)
         case "quit": //Run program for leavign the aplication
-            print("Nothing here yet")
+            menu.quit()
         default:
             print("Invaled Input")
             
@@ -83,7 +91,7 @@ Options:
     //Method for entering a user password
     func logingIn() {
         let password = "password"
-        print("Welcome to the task manager, please enter your password.")
+        print("Welcome to the task manager, please enter your password, its definitely not password")
         var userInput = readLine()
         while userInput != password {
             print("Invaled password, please try agian.")
