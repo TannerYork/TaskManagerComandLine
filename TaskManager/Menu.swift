@@ -65,7 +65,6 @@ Options:
             taskList.removeTask()
         case "edit task": //Edits a task the user enters
             taskList.editTask()
-            sleep(10)
         case "completed task": //Run program for listing only completed task
             taskList.printCompletedTask()
             sleep(10)
@@ -77,6 +76,7 @@ Options:
             sleep(10)
         case "quit": //Run program for leavign the aplication
             menu.quit()
+            print("Thanks for trying the application")
         default:
             print("Invaled Input")
             

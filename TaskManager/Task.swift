@@ -23,12 +23,14 @@ class Task {
         if priority < 0 { //Makes sure the priority can never go below 0 and break code
             priority = 0
         }
+        if priority > 0 {
         for _ in (0..<priority) { //Adds a ! mark for the pirority number(This needs to be redone)
             self.title.append("!")
         }
+        }
         if completByDate != nil {
             let compomentsOfDate = calendar.dateComponents([.year, .day, .month], from: completByDate!)
-            if compomentsOfDate.day == 24 && compomentsOfDate.month == 12 {
+            if compomentsOfDate.day == 25 && compomentsOfDate.month == 12 {
                 self.title.append("🎄")
             }
         }
@@ -68,7 +70,7 @@ class Task {
         priority = int
     }
     
-    //Method for chreating a date for the task
+    //Method for creating a date for the task
     func completionDate(_ input: String) {
         let newDate = dateFormatter.date(from: input) ?? nil
         self.completeByDate = newDate

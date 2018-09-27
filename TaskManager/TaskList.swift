@@ -10,7 +10,7 @@ import Foundation
 let taskList = TaskList()
 class TaskList {
     var taskList: [Task] = []
-
+    
     //Method for aranging task based on priority
     func sortByPriority() -> [Task] {
         let sortedTaskList = taskList.sorted(by: { $0.priority > $1.priority })
@@ -72,7 +72,7 @@ class TaskList {
                 Completion Date: \(newTask.CompletionDateFormated())
                 Priority: \(newTask.priority)
                 @@ Enter taskComplete to finish the
-                   new task @@
+                new task @@
                 """)
         }
         var finishTask = false
@@ -97,10 +97,35 @@ class TaskList {
                 print("Enter a date for task to be completed by, MM/dd/yyyy")
                 let newDate = Utilities.getStringInput()
                 newTask.completionDate(newDate)
+                if newTask.completeByDate != nil { //This chesks in completion date is nil and if it is not it checks if the date is christmas day and if it is then it adds a tree and if its not it checks in there is a tree in the title and if there is it removes it.
+                    let compomentsOfDate = calendar.dateComponents([.year, .day, .month], from: newTask.completeByDate!)
+                    if compomentsOfDate.day == 25 && compomentsOfDate.month == 12 {
+                        newTask.title.append("🎄")
+                    } else if newTask.title.contains("🎄") {
+                        let index = newTask.title.firstIndex(of: "🎄")
+                        for character in newTask.title {
+                            if character == "🎄" {
+                                newTask.title.remove(at: index!)
+                            }
+                        }
+                    }
+                }
             case "priority":
                 print("Enter priority, 1-10")
                 let priorityLevel = Utilities.getIntInput()
                 newTask.setPriority(to: priorityLevel)
+                if newTask.priority > 0 { //This does the same as the tree exept its based on priority.
+                for _ in 0..<newTask.priority {
+                    newTask.title.append("!")
+                }
+                } else if newTask.priority == 0 {
+                    let index = newTask.title.firstIndex(of: "!")
+                    for character in newTask.title {
+                        if character == "!" {
+                            newTask.title.remove(at: index!)
+                        }
+                    }
+                }
             case "taskComplete":
                 print("Are you sure you are done? Y/N")
                 var userInput = Utilities.getStringInput()
@@ -159,7 +184,7 @@ class TaskList {
                         Completion Date: \(task.CompletionDateFormated())
                         Priority: \(task.priority)
                         @@ Enter taskComplete to finish
-                            the edit @@
+                        the edit @@
                         """)
                 }
                 var finishTask = false
@@ -184,10 +209,33 @@ class TaskList {
                         print("Enter a date for task to be completed by, MM/dd/yyy")
                         let newDate = Utilities.getStringInput()
                         task.completionDate(newDate)
+                        let compomentsOfDate = calendar.dateComponents([.year, .day, .month], from: task.completeByDate!)
+                        if compomentsOfDate.day == 25 && compomentsOfDate.month == 12 {
+                            task.title.append("🎄")
+                        } else if task.title.contains("🎄") {
+                            let index = task.title.firstIndex(of: "🎄")
+                            for character in task.title {
+                                if character == "🎄" {
+                                    task.title.remove(at: index!)
+                                }
+                            }
+                        }
                     case "priority":
                         print("Enter priority, 1-10")
                         let priorityLevel = Utilities.getIntInput()
                         task.setPriority(to: priorityLevel)
+                        if task.priority > 0 {
+                            for _ in 0..<task.priority {
+                                task.title.append("!")
+                            }
+                        } else if task.priority == 0 {
+                            let index = task.title.firstIndex(of: "!")
+                            for character in task.title {
+                                if character == "!" {
+                                    task.title.remove(at: index!)
+                                }
+                            }
+                        }
                     case "taskComplete":
                         print("Are you sure you are done? Y/N")
                         var userInput = Utilities.getStringInput()

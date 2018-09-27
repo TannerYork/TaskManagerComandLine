@@ -24,7 +24,7 @@ import Foundation
 //Extra Challenges
 //Add a priority system to Tasks. Tasks should be sorted by the priority in each Task list. ✔︎
 //Allow the user to set a custom complete by date for each Task. ✔︎
-//    Allow the user to edit an existing Task by changing the title, task details, and complete by date.
+//    Allow the user to edit an existing Task by changing the title, task details, and complete by date. ✔︎
 //    Implement persistence for the app, so that the user’s list of Tasks persists between runs of the application.
 //Add easter eggs to the Task Manager! Be creative with these. They could be triggered when a user enters in a specific input, when a user takes a specific series of actions, etc.
 //Add a login system to the Task Manager. Have the user enter a password to get into the application whenever it starts up. ✔︎
